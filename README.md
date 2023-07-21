@@ -11,6 +11,7 @@ This project encompasses enabling a BLE communication in TM4C1294 Launch Pad by 
 # References 
 * 📖 Intro to Bluetooth Low Energy, by Mohammad Afaneh [[Amazon link]( https://amz.run/6ucB )]
 * 📎  Bluetooth Vs. Bluetooth Low Energy: What's The Difference? [[2023 Update](https://www.link-labs.com/blog/bluetooth-vs-bluetooth-low-energy)]
+* 📚 Texas Instruments Technical Documents [[Search Technical Documents here](https://www.ti.com/technical-documents/techdoc/results?viewType=mostuseful&rootFamilyId=64&familyId=64&docCategoryId=1&litCount=all)]
 
 
 # Motives
