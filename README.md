@@ -22,5 +22,20 @@ Bluetooth is a short range wireless technology for communication and data exchan
 In the context of systems with energy constraints and/or meant to function for a long time without battery replacement, BLE became the wisest choice among both. Based on the "race to idle principle", a BLE device will only leave sleep mode when triggered. While it makes it unconvenient for use cases involving streaming data, it's optimal for devices that share data periodically such as sensors, door bells and more systems like Industrial monitoring systems.
 
 ## External implementation of the BLE functionality
-The aim behind keeping the BLE communication duties to a dedicated processor -the coprocessor- is to preserve the TM4C1294 efficiency. 
+The decision to offload Bluetooth Low Energy (BLE) communication duties to a dedicated coprocessor, rather than handling them on the main processor (TM4C1294), is primarily aimed at preserving the efficiency and performance of the TM4C1294 microcontroller allowing it to focus on its core tasks.
+
+- **Power Efficiency:** BLE communication often involves periodic transmissions and receptions of data, which can consume a significant amount of power. By using a separate coprocessor for handling BLE tasks, the main processor can remain in a low-power state for longer periods. This leads to overall power savings and helps prolong the battery life in battery-powered devices.
+
+- **Processing Load:** The TM4C1294 is a general-purpose microcontroller that may already be handling a variety of tasks, such as running the main application, interfacing with other peripherals, and managing system operations. Adding the responsibility of handling BLE communication on top of these tasks can place a heavy processing load on the main processor, potentially leading to reduced performance or increased response time for critical tasks.
+
+- **Parallelism and Responsiveness:** By employing a dedicated coprocessor for BLE communication, it is possible to execute Bluetooth-related tasks in parallel with other operations performed by the main processor. This parallelism ensures that the main processor can focus on its primary tasks, enhancing the overall responsiveness of the system.
+
+- **Simplified Design and Development:** Separating BLE communication onto a coprocessor allows for a cleaner system design and modular architecture. The main processor can interact with the coprocessor through well-defined interfaces and APIs, making it easier to manage and maintain the codebase.
+
+- **Resource Sharing:** The coprocessor is likely optimized for BLE communication tasks and might include hardware accelerators or specialized instructions to efficiently handle Bluetooth protocols. By leveraging this specialized hardware, the main processor can save its own resources for other critical tasks, improving the system's overall efficiency.
+
+ - **Firmware Updates:** If the coprocessor's firmware needs updating to address bugs or add new features, it can often be updated independently of the main processor's firmware. This separation allows for easier firmware maintenance and updates.
+
+- **Security:** Isolating BLE communication to a dedicated coprocessor can also enhance security. By minimizing the direct interaction of the main processor with the BLE stack and radio, potential vulnerabilities are limited, making it harder for malicious actors to exploit the system.
+
 
