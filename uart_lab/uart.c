@@ -18,7 +18,7 @@
 #define TARGET_IS_TM4C129_RA2
 
 uint32_t sysClock;
-char ui32Loop=0;
+int ui32Loop= '0';
 volatile bool timeoutFlag = false;
 char receivedChar ='3';
 bool test;
@@ -91,19 +91,19 @@ int main(void){
     UARTFIFOEnable(UART0_BASE) ;
 
     // UART_TX_TEST
-    /*
-    for(i=0;i<10;i++){
-        UARTCharPut(UART0_BASE, 'T');
-        UARTCharPut(UART0_BASE, 'E');
-        UARTCharPut(UART0_BASE, 'S');
-        UARTCharPut(UART0_BASE, 'T');
-        UARTCharPut(UART0_BASE, ' ');
-        GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_1, GPIO_PIN_1);
-        //UARTprintf("Count : %d \n",ui32Loop);
-        UARTCharPutNonBlocking(UART0_BASE, ui32Loop);
-        ui32Loop++;
-        SysCtlDelay(SysCtlClockGet() / 3);
-        GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_1, 0);*/
+
+//    while(1){
+//        UARTCharPut(UART0_BASE, 'T');
+//        UARTCharPut(UART0_BASE, 'E');
+//        UARTCharPut(UART0_BASE, 'S');
+//        UARTCharPut(UART0_BASE, 'T');
+//        UARTCharPut(UART0_BASE, ' ');
+//        GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_1, GPIO_PIN_1);
+//        //UARTprintf("Count : %d \n",ui32Loop);
+//        UARTCharPutNonBlocking(UART0_BASE, (unsigned char) ui32Loop);
+//        ui32Loop++;
+//        SysCtlDelay(5*16000000u / 3u);
+//        GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_1, 0);
 
     // UART_RX_TEST
 
@@ -113,35 +113,37 @@ int main(void){
         while ( UARTCharsAvail ( UART0_BASE ) )
         {
             ch = UARTCharGetNonBlocking(UART0_BASE) ;
+            UARTCharPut(UART0_BASE, ch);
         }
+
         receivedChar = (unsigned char)( ch );
 
         switch (receivedChar)
         {
         case '1':
             GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_1, GPIO_PIN_1);
-            SysCtlDelay(5*16000000U / 3u);
+            SysCtlDelay(3*16000000U / 3u);
             break;
 
         case '2':
             GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_0, GPIO_PIN_0);
-            SysCtlDelay(5*16000000u / 3u);
+            SysCtlDelay(3*16000000u / 3u);
             break;
 
         case '3':
             GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_4, GPIO_PIN_4);
-            SysCtlDelay(5*16000000u / 3u);
+            SysCtlDelay(3*16000000u / 3u);
             break;
 
         case '4':
             GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_0, GPIO_PIN_0);
-            SysCtlDelay(5*16000000u / 3u);
+            SysCtlDelay(3*16000000u / 3u);
             break;
 
         default:
             GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_4 | GPIO_PIN_0, GPIO_PIN_4 | GPIO_PIN_0);
             GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_1 | GPIO_PIN_0, GPIO_PIN_1 | GPIO_PIN_0);
-            SysCtlDelay(5*16000000u / 3u);
+            SysCtlDelay(3*16000000u / 3u);
             break;
         }
 
@@ -149,6 +151,6 @@ int main(void){
 
         GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_4 | GPIO_PIN_0, 0);
         GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_1 | GPIO_PIN_0, 0);
-        SysCtlDelay(15*16000000u / 3u);
+        SysCtlDelay(2*16000000u / 3u);
     }
 }
