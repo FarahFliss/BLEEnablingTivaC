@@ -28,7 +28,7 @@ This is a simple program enabling our Tiva C Launch Pad's UART connection (UART0
 
 ## 🧠 Good to know (for newbies like me 😄) 
 - It's important to know that every component of the the launch pad should be configured and ** then enabled**. Thus, using UART0 in our case was preceded by configuring its clock, GPIO and pins.
-- **About UART**:
+- **About UART:**
     * UART stands for Universal Asynchronous Serial Communication, let's explain every term!
         - Universal: because UART is versatile --> it supports various data formats and baud rates [^2]
         - Asynchronous: because the receiver and the transmitter aren't synchronised (you don't say?) by a shared clock --> they instead rely on a agreed upon baud rate and a data stream (start and stop bits)
@@ -49,6 +49,30 @@ This is a simple program enabling our Tiva C Launch Pad's UART connection (UART0
 
 </div>
 
+- **Testing UART Tx:**
+    * After importing the project, go to uart.c
+    * You'll find commented sections //UART_TX_TEST and //UART_RX_TEST. We're going to focus on the //UART_TX_TEST
+    * Select the section below if it's commented and CTRL+7 to make it executable
+    * This code snippet will let us check if the Board UART Tx. We're going to ask the board to send us a test message periodically.
+    * In order to see the message, we need a serial terminal which is a computer program or hardware device that allows communication with another device or computer over a serial interface. In our case we're using a software like PuTTY, Realterm or the serial terminal embedded in Code Composer Studio.
+    * In this example, we used Realterm just to show you the UART set configurations, they must match with the board's configuration.
+    ![realterm](https://imgur.com/LsoELTc.png)
+    * In order to know/modify the board's serial communication configurations, if you're on windows 10 like me, go to Device Manager > Ports (COM & LPT) <br>
+    ![deviceman](https://imgur.com/2yAtsex.png)
+    * If you double click on the right port (which is Stellaris, so COM10 in my case) then go to Port settings, you can adjust the parameters like so: <br>
+    ![param](https://imgur.com/0AEd3JF.png)
+    * These are the most frequently used parameters, just make sure they're the same in both sides for now
+    * If everything goes well, (hopefully!) we should see the test message like the picture above. If you happen to see gibberish, this most likely mean the parameters don't match (the data is misinterpreted)
+ 
+-  **Testing UART Rx:**
+    * Now let's put the //UART_TX_TEST section in comments and focus on //UART_RX_TEST code snippet
+    * Same as before, we're monitoring what's going on via the Serial terminal of your choice
+    * In this example, we used PuTTY
+    * The code will prompt the user to enter a text
+    * Reading the code, it's obvious that if you enter 1, LED 1 will be enabled, if you enter 2 etc ... and if you enter anything else, the 4 LEDs will turn on.
+    * Everytime the PC gets your input, it sends it to the board and the board responds back by echoing the character you just typed and simultaneously turn on the corresponding LEDs
+    * After the given delay, all LEDs will get turned off to signal to the user that he can type another character (indicating the start of the next loop) 
+    * This allows us to know that the UART communication is receiving the right data
 
 
 [^1]: See the "blink" folder containing the Practice Code 01 for more details
