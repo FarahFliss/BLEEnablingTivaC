@@ -19,7 +19,7 @@ By reading this code, you will get to know how to :
 ## Functionality 
 This is a simple program making all 4 LEDs of our Tiva C Launch Pad blink roughly every second (delay simulated by a for loop) 
 
-## Good to know (for newbies) 
+## Good to know (for newbies like me) 
 You'll notice the code is always divided to 3 main parts:
 1. Importing the required headers and definig macros: this covers special C libraries (such as stdbool to be able to use the boolean type in C) or libraries specific to the board such as the memory mapping, the GPIO macros etc.
 2. Initializing: this is where we configure and enable the components we're using. In this example, we needed the GPIO N and F for the leds, their respective clocks and the system clock. 
